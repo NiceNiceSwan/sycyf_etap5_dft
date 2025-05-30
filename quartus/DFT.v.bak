@@ -1,0 +1,25 @@
+module DFT(
+	input rst,
+	input clk,
+	input ena
+);
+
+localparam SIZE = 3;
+localparam [SIZE-1:0]	idle = 0,
+								init = 1,
+								read = 2,
+								s3 = 3,
+								s4 = 4,
+								s5 = 5,
+								s6 = 6;
+						
+reg [SIZE-1:0] state_reg, state_next;
+
+always @(posedge clk, posedge rst) begin
+	if (rst)
+		state_reg <= idle;
+	else if (ena)
+		state_reg <= state_next;
+end
+	
+	
